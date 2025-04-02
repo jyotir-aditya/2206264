@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import path from "path";
 import dotenv from "dotenv";
 import axios from "axios";
 
@@ -249,48 +248,10 @@ app.get("/posts", (req, res) => {
   }
 });
 
-// 📌 2️⃣ GET with Query Parameters: `/search?query=example`
-app.get("/search", (req, res) => {
-  const { greet } = req.query;
-  res.json({ message: `You searched for: ${greet}` });
-});
 
-// 📌 3️⃣ GET with URL Parameters: `/user/123`
-app.get("/user/:id", (req, res) => {
-  res.json({ userId: req.params.id });
-});
 
-// 📌 4️⃣ POST with JSON Body
-app.post("/data", (req, res) => {
-  console.log("Received JSON Data:", req.body);
-  res
-    .status(201)
-    .json({ message: "Data received successfully!", data: req.body });
-});
 
-//  Sending JSON Response
-app.get("/json", (req, res) => {
-  res.json({ message: "This is a JSON response", status: "success" });
-});
-
-//  Sending Different Status Codes
-app.get("/error", (req, res) => {
-  res.status(500).json({ error: "Something went wrong!" });
-});
-
-//  Handling Authentication with Headers
-app.get("/protected", (req, res) => {
-  const token = req.headers["authorization"];
-  if (!token || token !== "Bearer secret-token") {
-    return res.status(403).json({ error: "Unauthorized access!" });
-  }
-  res.json({ message: "Access granted!" });
-});
-
-//  Serving Static Files
-app.use("/static", express.static("public"));
-
-// Make sure we authenticate when the server starts
+// Authenticate when the server starts
 (async function () {
   console.log("Authenticating with the service...");
   await authenticate();
