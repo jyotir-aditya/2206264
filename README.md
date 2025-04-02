@@ -1,5 +1,3 @@
-# 2206264
-
 ### First Run Backend
 
 cd Question_1
